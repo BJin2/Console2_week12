@@ -54,7 +54,7 @@ void ATPSProjectileWeapon::SpawnProjectile(FRotator EyeRot)
 	{
 		FVector socketLoc;
 		FRotator socketRot;
-		MeshComp->GetSocketWorldLocationAndRotation(TEXT("MuzzleFlashSocket"), socketLoc, socketRot);
+		MeshComp->GetSocketWorldLocationAndRotation(MuzzleSocketName, socketLoc, socketRot);
 		GetWorld()->SpawnActor<ATPSProjectile>(ProjectileObject, socketLoc, EyeRot);
 	}
 }
