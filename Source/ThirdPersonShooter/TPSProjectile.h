@@ -33,6 +33,9 @@ public:
 	void Explode();
 
 protected:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon")
+	float BaseDamage = 80;
+
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 

@@ -42,7 +42,7 @@ void ATPSProjectile::Explode()
 		transform.SetScale3D(FVector(3.0f));
 		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ExplosionEffect, transform, true);
 		DrawDebugSphere(GetWorld(), GetActorLocation(), 200, 32, FColor::Red, false, 1.0f, 0, 1.0f);
-		if (UGameplayStatics::ApplyRadialDamage(GetWorld(), 300, GetActorLocation(), 200, UDamageType::StaticClass(), TArray<AActor*>(), nullptr, nullptr, true))
+		if (UGameplayStatics::ApplyRadialDamage(GetWorld(), BaseDamage, GetActorLocation(), 200, UDamageType::StaticClass(), TArray<AActor*>(), nullptr, nullptr, true))
 		{
 			DrawDebugSphere(GetWorld(), GetActorLocation(), 200, 32, FColor::Blue, false, 1.0f, 0, 1.0f);
 		}
