@@ -7,6 +7,24 @@
 #include "HealthComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "GameFramework/PlayerStart.h"
+#include "LobbyData.h"
+
+void ATPSGameMode::PlayerJoined(int playerIndex, FName playerName)
+{
+	playerNames[playerIndex] = playerName;
+	if (numPlayersA <= numPlayersB)
+	{
+		playerTeams[playerIndex] = PlayerTeam::TeamA;
+		lobbyData->teamANames.Add(playerName);
+		numPlayersA++;
+	}
+	else
+	{
+		playerTeams[playerIndex] = PlayerTeam::TeamB;
+		lobbyData->teamBNames.Add(playerName);
+		numPlayersB++;
+	}
+}
 
 AActor * ATPSGameMode::ChoosePlayerStart_Implementation(AController * Player)
 {
@@ -37,6 +55,12 @@ void ATPSGameMode::StartPlay()
 {
 	Super::StartPlay();
 	StartWave();
+	for (int i = 0; i < GetNumPlayers(); i++)
+	{
+		playerTeams.Add(PlayerTeam::TeamA);
+		playerNames.Add("Player");
+	}
+	lobbyData = Cast<ALobbyData>(GetWorld()->SpawnActor(ALobbyData::StaticClass()));
 }
 
 void ATPSGameMode::Tick(float DeltaTime)

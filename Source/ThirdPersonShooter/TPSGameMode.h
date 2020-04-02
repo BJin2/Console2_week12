@@ -6,6 +6,15 @@
 #include "GameFramework/GameModeBase.h"
 #include "TPSGameMode.generated.h"
 
+UENUM()
+enum class PlayerTeam : uint8
+{
+	TeamA 		UMETA(DisplayName = "Team A"),
+	TeamB 		UMETA(DisplayName = "Team B"),
+};
+
+class ALobbyData;
+
 /**
  * 
  */
@@ -28,6 +37,15 @@ protected:
 	void PrepareForNextWave();
 	void CheckWaveState();
 	//Lobby
+	UPROPERTY(BlueprintReadOnly, Category = "Lobby")
+	TArray<TEnumAsByte<PlayerTeam>> playerTeams;
+	UPROPERTY(BlueprintReadOnly, Category = "Lobby")
+	TArray<FName> playerNames;
+	ALobbyData* lobbyData;
+	UFUNCTION(BlueprintCallable)
+	void PlayerJoined(int playerIndex, FName playerName);
+	int numPlayersA = 0;
+	int numPlayersB = 0;
 public:
 	virtual AActor* ChoosePlayerStart_Implementation(AController* Player) override;
 	ATPSGameMode();
