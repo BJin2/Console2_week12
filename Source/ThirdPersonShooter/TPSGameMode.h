@@ -27,6 +27,7 @@ protected:
 	void EndWave();
 	void PrepareForNextWave();
 	void CheckWaveState();
+	//Lobby
 public:
 	virtual AActor* ChoosePlayerStart_Implementation(AController* Player) override;
 	ATPSGameMode();
