@@ -17,6 +17,12 @@ public:
 	// Sets default values for this actor's properties
 	ATPSProjectile();
 
+	UPROPERTY(Replicated)
+	FTransform ServerTrans;
+
+	UFUNCTION(NetMulticast, Reliable)
+	void UpdateTransform();
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	UStaticMeshComponent* MeshComp;
 
@@ -33,6 +39,9 @@ public:
 	void Explode();
 
 protected:
+
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Weapon")
 	float BaseDamage = 80;
 

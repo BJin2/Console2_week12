@@ -48,7 +48,7 @@ void ATPSProjectileWeapon::Fire()
 	}
 }
 
-void ATPSProjectileWeapon::SpawnProjectile_Implementation(FRotator EyeRot)
+void ATPSProjectileWeapon::SpawnProjectile(FRotator EyeRot)
 {
 	if (ProjectileObject)
 	{

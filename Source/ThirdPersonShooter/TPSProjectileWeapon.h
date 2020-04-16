@@ -23,6 +23,5 @@ public:
 	TSubclassOf<ATPSProjectile> ProjectileObject;
 
 protected:
-	UFUNCTION(NetMulticast, Unreliable)
 	void SpawnProjectile(FRotator EyeRot);
 };

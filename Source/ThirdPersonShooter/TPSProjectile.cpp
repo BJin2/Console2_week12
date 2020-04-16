@@ -5,6 +5,7 @@
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "DrawDebugHelpers.h"
 #include "GameFramework/DamageType.h"
+#include "Net/UnrealNetwork.h"
 #include "Engine/Engine.h"
 
 
@@ -32,6 +33,24 @@ void ATPSProjectile::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if (Role == ROLE_Authority)
+	{
+		ServerTrans = GetTransform();
+		UpdateTransform();
+	}
+}
+
+void ATPSProjectile::UpdateTransform_Implementation()
+{
+	SetActorTransform(ServerTrans);
+}
+
+
+void ATPSProjectile::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+
+	DOREPLIFETIME(ATPSProjectile, ServerTrans);
 }
 
 void ATPSProjectile::Explode()
